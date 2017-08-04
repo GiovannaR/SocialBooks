@@ -2,6 +2,7 @@ package com.crc.socialbooks.com.algaworks.socialbooks.resources;
 
 import com.crc.socialbooks.com.algaworks.socialbooks.com.algaworks.socialbooks.services.LivrosService;
 import com.crc.socialbooks.com.algaworks.socialbooks.com.algaworks.socialbooks.services.exceptions.LivroNaoEncontradoException;
+import com.crc.socialbooks.com.algaworks.socialbooks.domain.Comentario;
 import com.crc.socialbooks.com.algaworks.socialbooks.domain.Livro;
 import com.crc.socialbooks.com.algaworks.socialbooks.repository.LivrosRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -60,4 +61,19 @@ public class LivrosResources {
     }
 
 
+    @RequestMapping(value= "/{id}/comentarios", method = RequestMethod.POST)
+    public ResponseEntity<Void> adicionarComentario (@PathVariable("id") Long livroId, @RequestBody Comentario comentarios){
+        livrosService.salvarComentario(livroId, comentarios);
+
+        URI uri = ServletUriComponentsBuilder.fromCurrentRequest( ).build( ).toUri();
+
+        return ResponseEntity.created(uri).build();
+    }
+
+    @RequestMapping(value="/{id}/comentarios", method = RequestMethod.GET)
+    public ResponseEntity<List<Comentario>> listarComentarios(@PathVariable("id") Long livroid){
+        List<Comentario> comentarios = livrosService.listarComentarios(livroid);
+
+        return ResponseEntity.status(HttpStatus.OK).body(comentarios);
+    }
 }

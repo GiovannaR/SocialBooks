@@ -1,6 +1,10 @@
 package com.crc.socialbooks.com.algaworks.socialbooks.domain;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 
 import javax.persistence.*;
@@ -96,4 +100,11 @@ public class Livro {
     public void setAutor(String autor) {
         this.autor = autor;
     }
+
+    @RequestMapping(value = "/{id}/comentarios", method = RequestMethod.POST)
+    public void adicionarComentario(@PathVariable("id") Long LivroId, @RequestBody Comentario comentario){
+
+    }
+
+
 }

@@ -7,9 +7,15 @@ import java.util.Date;
 
 @Entity
 public class Comentario {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     private String texto;
+
     private String usuario;
+
     private Date data;
 
     @ManyToOne(fetch = FetchType.LAZY)
@@ -17,8 +23,7 @@ public class Comentario {
     @JsonIgnore
     private Livro livro;
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+
     public void setId(Long id) {
         this.id = id;
     }
@@ -49,5 +54,13 @@ public class Comentario {
 
     public Long getId( ){
         return id;
+    }
+
+    public Livro getLivro() {
+        return livro;
+    }
+
+    public void setLivro(Livro livro) {
+        this.livro = livro;
     }
 }
