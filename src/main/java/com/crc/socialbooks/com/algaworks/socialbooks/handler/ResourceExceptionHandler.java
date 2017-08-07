@@ -4,6 +4,7 @@ import com.crc.socialbooks.com.algaworks.socialbooks.com.algaworks.socialbooks.s
 import com.crc.socialbooks.com.algaworks.socialbooks.com.algaworks.socialbooks.services.exceptions.LivroNaoEncontradoException;
 import com.crc.socialbooks.com.algaworks.socialbooks.com.algaworks.socialbooks.services.exceptions.autorNaoEncontradoException;
 import com.crc.socialbooks.com.algaworks.socialbooks.domain.DetalhesErro;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -48,6 +49,18 @@ public class ResourceExceptionHandler {
 
 
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(erro);
+    }
+
+    @ExceptionHandler(DataIntegrityViolationException.class)
+    public ResponseEntity<DetalhesErro> handlDataIntegrityViolationExceptione(DataIntegrityViolationException e, HttpServletRequest request){
+        DetalhesErro erro = new DetalhesErro();
+        erro.setStatus(400l);
+        erro.setTitulo("Requisição inválida");
+        erro.setMensagemDesenvolvedor("http://erros.socialbooks.com/409");
+        erro.setTimestamp(System.currentTimeMillis());
+
+
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(erro);
     }
 
 }

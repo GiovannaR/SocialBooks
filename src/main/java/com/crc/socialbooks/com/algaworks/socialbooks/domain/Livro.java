@@ -1,5 +1,6 @@
 package com.crc.socialbooks.com.algaworks.socialbooks.domain;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -23,6 +24,7 @@ public class Livro {
     private String nome;
 
     @JsonInclude(JsonInclude.Include.NON_NULL)
+    @JsonFormat(pattern = "dd/MM/yyyy")
     private Date publicacao;
 
     @JsonInclude(JsonInclude.Include.NON_NULL)
@@ -31,7 +33,7 @@ public class Livro {
     @JsonInclude(JsonInclude.Include.NON_NULL)
     private String resumo;
 
-    @JsonInclude(JsonInclude.Include.NON_NULL)
+    @JsonInclude(JsonInclude.Include.NON_EMPTY)
     @OneToMany(mappedBy = "livro")
     private List<Comentario> comentarios;
 

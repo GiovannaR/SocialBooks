@@ -1,6 +1,8 @@
 package com.crc.socialbooks.com.algaworks.socialbooks.domain;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonInclude;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -13,14 +15,19 @@ public class Autor {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     private String nome;
 
+    @JsonFormat(pattern = "dd/MM/yyyy")
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     private Date nascimento;
 
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     private String nacionalidade;
 
     @OneToMany(mappedBy = "autor")
     @JsonIgnore
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     private List<Livro> livros;
 
     public Long getId() {
