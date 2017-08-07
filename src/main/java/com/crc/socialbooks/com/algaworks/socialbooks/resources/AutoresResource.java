@@ -2,6 +2,7 @@ package com.crc.socialbooks.com.algaworks.socialbooks.resources;
 
 import com.crc.socialbooks.com.algaworks.socialbooks.com.algaworks.socialbooks.services.AutoresService;
 import com.crc.socialbooks.com.algaworks.socialbooks.domain.Autor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -14,6 +15,7 @@ import java.util.List;
 @RequestMapping("/autores")
 public class AutoresResource {
 
+    @Autowired
     private AutoresService autoresService;
 
     @RequestMapping(method = RequestMethod.GET)
