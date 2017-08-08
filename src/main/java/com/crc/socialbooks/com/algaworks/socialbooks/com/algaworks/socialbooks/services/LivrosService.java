@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 
+import javax.validation.Valid;
 import java.util.Date;
 import java.util.List;
 
@@ -59,7 +60,7 @@ public class LivrosService {
         buscar(livro.getId());
     }
 
-    public Comentario salvarComentario (Long LivroId, Comentario comentario){
+    public Comentario salvarComentario (@Valid Long LivroId, Comentario comentario){
         Livro livro = buscar(LivroId);
         comentario.setLivro(livro);
         comentario.setData(new Date());

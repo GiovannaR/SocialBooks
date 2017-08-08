@@ -31,7 +31,7 @@ public class AutoresService {
         return autoresRepository.save(autor);
     }
 
-    public Autor buscar (Long id){
+    public Autor buscar (Long id)  {
         Autor autor = autoresRepository.findOne(id);
 
         if ( autor == null ){
