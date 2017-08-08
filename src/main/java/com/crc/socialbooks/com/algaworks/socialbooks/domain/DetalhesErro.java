@@ -42,3 +42,4 @@ public class DetalhesErro {
         this.mensagemDesenvolvedor = mensagemDesenvolvedor;
     }
 }
+

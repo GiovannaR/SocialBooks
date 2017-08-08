@@ -4,7 +4,7 @@ import com.crc.socialbooks.com.algaworks.socialbooks.com.algaworks.socialbooks.s
 import com.crc.socialbooks.com.algaworks.socialbooks.domain.Comentario;
 import com.crc.socialbooks.com.algaworks.socialbooks.domain.Livro;
 import com.crc.socialbooks.com.algaworks.socialbooks.repository.ComentariosRepository;
-import com.crc.socialbooks.com.algaworks.socialbooks.repository.LivrosRepository;
+import com.crc.socialbooks.com.algaworks.socialbooks.repository.LivroRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
@@ -17,7 +17,7 @@ import java.util.List;
 public class LivrosService {
 
     @Autowired
-    public LivrosRepository livrosRepository;
+    public LivroRepository livrosRepository;
 
     @Autowired
     private ComentariosRepository comentariosRepository;

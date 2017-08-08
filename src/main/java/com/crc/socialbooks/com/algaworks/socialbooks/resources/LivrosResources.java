@@ -1,21 +1,19 @@
 package com.crc.socialbooks.com.algaworks.socialbooks.resources;
 
 import com.crc.socialbooks.com.algaworks.socialbooks.com.algaworks.socialbooks.services.LivrosService;
-import com.crc.socialbooks.com.algaworks.socialbooks.com.algaworks.socialbooks.services.exceptions.LivroNaoEncontradoException;
 import com.crc.socialbooks.com.algaworks.socialbooks.domain.Comentario;
 import com.crc.socialbooks.com.algaworks.socialbooks.domain.Livro;
-import com.crc.socialbooks.com.algaworks.socialbooks.repository.LivrosRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.http.CacheControl;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import javax.validation.Valid;
 import java.net.URI;
-import java.util.Arrays;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
@@ -68,6 +66,12 @@ public class LivrosResources {
 
     @RequestMapping(value= "/{id}/comentarios", method = RequestMethod.POST)
     public ResponseEntity<Void> adicionarComentario ( @PathVariable("id") Long livroId, @RequestBody Comentario comentarios){
+
+
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+
+        comentarios.setUsuario(auth.getName());
+
         livrosService.salvarComentario(livroId, comentarios);
 
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest( ).build( ).toUri();
