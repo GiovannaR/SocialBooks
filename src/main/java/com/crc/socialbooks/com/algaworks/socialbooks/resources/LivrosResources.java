@@ -35,7 +35,7 @@ public class LivrosResources {
 
         livro = livrosService.salvar(livro);
 
-        URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id").buildAndExpand(livro.getId()).toUri();
+        URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(livro.getId()).toUri();
 
         return ResponseEntity.created(uri).build();
     }
@@ -74,7 +74,7 @@ public class LivrosResources {
 
         livrosService.salvarComentario(livroId, comentarios);
 
-        URI uri = ServletUriComponentsBuilder.fromCurrentRequest( ).build( ).toUri();
+        URI uri = ServletUriComponentsBuilder.fromCurrentRequest().build().toUri();
 
         return ResponseEntity.created(uri).build();
     }

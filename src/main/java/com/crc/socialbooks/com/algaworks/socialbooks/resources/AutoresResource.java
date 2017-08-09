@@ -33,7 +33,7 @@ public class AutoresResource {
     @RequestMapping(method = RequestMethod.POST)
     public ResponseEntity<Void> salvar(@Valid @RequestBody Autor autor){
         autor = autoresService.salvar(autor);
-        URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id").buildAndExpand(autor.getId()).toUri();
+        URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(autor.getId()).toUri();
 
         return ResponseEntity.created(uri).build();
     }
