@@ -25,6 +25,7 @@ public class LivrosResources {
     @Autowired
     public LivrosService livrosService;
 
+    @CrossOrigin
     @RequestMapping( method = RequestMethod.GET)
     public ResponseEntity<List<Livro>> listar( ){
         return ResponseEntity.status(HttpStatus.OK).body(livrosService.listar());
