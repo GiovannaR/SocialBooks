@@ -27,7 +27,7 @@ public class SapatoResources {
     @RequestMapping(method = RequestMethod.POST)
     public ResponseEntity<Void> salvar (@RequestBody Sapato sapato){
         sapato = sapatoService.salvar(sapato);
-        return ResponseEntity.status(HttpStatus.OK);
+        return (ResponseEntity<Void>) ResponseEntity.status(HttpStatus.OK);
     }
 
 

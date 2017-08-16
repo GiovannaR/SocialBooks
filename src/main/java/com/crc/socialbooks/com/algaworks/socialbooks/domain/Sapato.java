@@ -25,7 +25,7 @@ public class Sapato {
     private String estilo;
 
     @JsonInclude(@JsonInclude.Include.NON_NULL)
-    private String usuario
+    private String usuario;
 
 
     public Long getId() {
