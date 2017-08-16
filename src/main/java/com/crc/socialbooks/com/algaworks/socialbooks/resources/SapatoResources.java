@@ -5,10 +5,7 @@ import com.crc.socialbooks.com.algaworks.socialbooks.domain.Sapato;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -25,10 +22,20 @@ public class SapatoResources {
     }
 
     @RequestMapping(method = RequestMethod.POST)
-    public ResponseEntity<Void> salvar (@RequestBody Sapato sapato){
+    public Sapato salvar (@RequestBody Sapato sapato){
         sapato = sapatoService.salvar(sapato);
-        return (ResponseEntity<Void>) ResponseEntity.status(HttpStatus.OK);
+        return sapato;
     }
 
+    @RequestMapping(value="/{id}", method = RequestMethod.GET)
+    public Sapato buscar(@PathVariable("id") Long id){
+        Sapato sapato = sapatoService.buscar(id);
+        return sapato;
+    }
+
+    @RequestMapping(value="/{id}", method = RequestMethod.DELETE)
+    public void deletar (@PathVariable("id") Long id){
+        sapatoService.deletar(id);
+    }
 
 }
