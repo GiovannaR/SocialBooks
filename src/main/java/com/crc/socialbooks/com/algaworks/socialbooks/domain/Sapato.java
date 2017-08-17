@@ -2,11 +2,10 @@ package com.crc.socialbooks.com.algaworks.socialbooks.domain;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 
+import javax.persistence.*;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+
+//import javax.persistence.*;
 
 @Entity
 public class Sapato {
@@ -29,7 +28,9 @@ public class Sapato {
     private String estilo;
 
     @JsonInclude(JsonInclude.Include.NON_NULL)
-    private String usuario;
+    @OneToOne(mappedBy = "sapato")
+    private Comprador comprador;
+
 
 
     public Long getId() {
@@ -64,12 +65,13 @@ public class Sapato {
         this.estilo = estilo;
     }
 
-    public String getUsuario() {
-        return usuario;
+
+    public Comprador getComprador() {
+        return comprador;
     }
 
-    public void setUsuario(String usuario) {
-        this.usuario = usuario;
+    public void setComprador(Comprador comprador) {
+        this.comprador = comprador;
     }
 
     public String getNome() {

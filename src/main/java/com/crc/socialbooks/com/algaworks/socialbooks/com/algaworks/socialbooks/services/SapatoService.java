@@ -2,7 +2,9 @@ package com.crc.socialbooks.com.algaworks.socialbooks.com.algaworks.socialbooks.
 
 
 import com.crc.socialbooks.com.algaworks.socialbooks.com.algaworks.socialbooks.services.exceptions.SapatoNaoEncontradoException;
+import com.crc.socialbooks.com.algaworks.socialbooks.domain.Comprador;
 import com.crc.socialbooks.com.algaworks.socialbooks.domain.Sapato;
+import com.crc.socialbooks.com.algaworks.socialbooks.repository.CompradorRepository;
 import com.crc.socialbooks.com.algaworks.socialbooks.repository.SapatoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
@@ -15,6 +17,9 @@ public class SapatoService {
 
     @Autowired
     public SapatoRepository sapatoRepository;
+
+    @Autowired
+    private CompradorRepository compradorRepository;
 
     public List<Sapato> listar (){
         return sapatoRepository.findAll();
@@ -45,6 +50,26 @@ public class SapatoService {
         }
     }
 
+    public void atualizar (Sapato sapato){
+        verificarExistencia(sapato);
+        sapatoRepository.save(sapato);
 
+    }
+
+    private void verificarExistencia (Sapato sapato){
+        buscar(sapato.getId());
+    }
+
+    public Comprador adicionarComprador (Long SapatoId, Comprador comprador){
+        Sapato sapato = buscar(SapatoId);
+        comprador.setSapato(sapato);
+
+        return compradorRepository.save(comprador);
+    }
+
+    public Comprador listarComprador (Long SapatoId){
+        Sapato sapato = buscar(SapatoId);
+        return sapato.getComprador();
+    }
 
 }
