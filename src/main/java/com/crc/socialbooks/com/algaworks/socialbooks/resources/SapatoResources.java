@@ -49,14 +49,15 @@ public class SapatoResources {
     }
 
     @RequestMapping(value = "/{id}/comprador", method = RequestMethod.POST)
-    public void adicionarComprador (@PathVariable("id") Long id, @RequestBody Comprador comprador){
+    public ResponseEntity<Void> adicionarComprador (@PathVariable("id") Long id, @RequestBody Comprador comprador){
         sapatoService.adicionarComprador(id, comprador);
+        return ResponseEntity.status(HttpStatus.OK).build();
     }
 
     @RequestMapping(value = "/{id}/comprador", method = RequestMethod.GET)
-    public Comprador listarComprador (@PathVariable("id") Long id){
+    public ResponseEntity<Comprador> listarComprador (@PathVariable("id") Long id){
         Comprador comprador = sapatoService.listarComprador(id);
-        return comprador;
+        return ResponseEntity.status(HttpStatus.OK).body(comprador);
     }
 
 }
